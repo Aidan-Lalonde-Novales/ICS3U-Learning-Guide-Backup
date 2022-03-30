@@ -7,6 +7,7 @@
 import stage
 import ugame
 
+
 def game_scene():
     # this function is the main game game_scene
 
@@ -15,7 +16,8 @@ def game_scene():
 
     # repeat forever, game loop
     while True:
-        pass # placeholder
+        pass  # placeholder
+
 
 if __name__ == "__main__":
     game_scene()
