@@ -53,7 +53,7 @@ def game_scene():
 
         # redraw Sprites
         game.render_sprites([ship])
-        game.tick() # wait until refresh rate finishes
+        game.tick()  # wait until refresh rate finishes
 
 
 if __name__ == "__main__":
