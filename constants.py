@@ -2,7 +2,7 @@
 
 # Created by Aidan Lalonde-Novales
 # Created April 2022
-# This file contains constants for the Space Alien game
+# This file contains constants for Space Aliens
 
 # PyBadgescreen size is 160x128 and sprites are 16x16
 SCREEN_X = 160
