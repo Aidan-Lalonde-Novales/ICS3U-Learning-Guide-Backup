@@ -21,7 +21,7 @@ def game_scene():
     start_button = constants.button_state["button_up"]
     select_button = constants.button_state["button_up"]
 
-    pew_sound = open("pew.wav", 'rb')
+    pew_sound = open("pew.wav", "rb")
     sound = ugame.audio
     sound.stop()
     sound.mute(False)
@@ -34,8 +34,11 @@ def game_scene():
     )
 
     alien = stage.Sprite(
-        image_bank_sprites, 9, int(constants.SCREEN_X / 2 - constants.SPRITE_SIZE / 2),
-    16)
+        image_bank_sprites,
+        9,
+        int(constants.SCREEN_X / 2 - constants.SPRITE_SIZE / 2),
+        16,
+    )
 
     # creates a stage, sets to 60fps
     game = stage.Stage(ugame.display, 60)
@@ -50,11 +53,11 @@ def game_scene():
         keys = ugame.buttons.get_pressed()
 
         if keys & ugame.K_O != 0:
-           if a_button == constants.button_state["button_up"]:
-            a_button = constants.button_state["button_just_pressed"]
-           elif a_button == constants.button_state["button_just_pressed"]:
-            a_button = constants.button_state["button_still_pressed"]
-           
+            if a_button == constants.button_state["button_up"]:
+                a_button = constants.button_state["button_just_pressed"]
+            elif a_button == constants.button_state["button_just_pressed"]:
+                a_button = constants.button_state["button_still_pressed"]
+
         else:
             if a_button == constants.button_state["button_still_pressed"]:
                 a_button = constants.button_state["button_released"]

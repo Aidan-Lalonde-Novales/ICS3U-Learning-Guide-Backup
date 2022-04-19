@@ -16,8 +16,8 @@ SPRITE_MOVEMENT_SPEED = 1
 
 # Using for button state
 button_state = {
-  "button_up": "up",
-  "button_just_pressed": "just pressed",
-  "button_still_pressed": "still pressed",
-  "button_released": "released"
+    "button_up": "up",
+    "button_just_pressed": "just pressed",
+    "button_still_pressed": "still pressed",
+    "button_released": "released",
 }
