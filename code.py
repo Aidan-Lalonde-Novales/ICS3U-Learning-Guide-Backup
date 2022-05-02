@@ -2,12 +2,13 @@
 
 # Created by Aidan Lalonde-Novales
 # Created May 2022
-# This file contains Learning Guide 08's code.
+# This file contains Learning Guide 09's code.
+
+import random
+import time
 
 import constants
-import random
 import stage
-import time
 import ugame
 
 
@@ -156,10 +157,18 @@ def game_scene():
         16,
     )
 
+    # create list of lasers when we shoot
+    lasers = []
+    for laser_number in range(constants.TOTAL_NUMBER_OF_LASERS):
+        a_single_laser = stage.Sprite(
+            image_bank_sprites, 10, constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y
+        )
+        lasers.append(a_single_laser)
+
     # creates a stage, sets to 60fps
     game = stage.Stage(ugame.display, 60)
     # order of layers
-    game.layers = [ship] + [alien] + [background]
+    game.layers = lasers + [ship] + [alien] + [background]
     # render the background and sprite list, most likely once per scene
     game.render_block()
 
@@ -200,10 +209,27 @@ def game_scene():
         # update game logic
         # play sound on A being pressed
         if a_button == constants.button_state["button_just_pressed"]:
-            sound.play(pew_sound)
+            # fire a laser, if limit is not exceeded
+            for laser_number in range(len(lasers)):
+                if lasers[laser_number].x < 0:
+                    lasers[laser_number].move(ship.x, ship.y)
+                    sound.play(pew_sound)
+                    break
+
+        # each frame move the lasers that have been fired up
+        for laser_number in range(len(lasers)):
+            if lasers[laser_number].x > 0:
+                lasers[laser_number].move(
+                    lasers[laser_number].x,
+                    lasers[laser_number].y - constants.LASER_SPEED,
+                )
+            if lasers[laser_number].y < constants.OFF_TOP_SCREEN:
+                lasers[laser_number].move(
+                    constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y
+                )
 
         # redraw Sprites
-        game.render_sprites([ship] + [alien])
+        game.render_sprites(lasers + [ship] + [alien])
         game.tick()  # wait until refresh rate finishes
 
 
