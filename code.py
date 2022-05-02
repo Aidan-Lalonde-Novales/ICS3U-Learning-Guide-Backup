@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 # Created by Aidan Lalonde-Novales
-# Created April 2022
-# This file contains Learning Guide 07's code.
+# Created May 2022
+# This file contains Learning Guide 08's code.
 
 import constants
 import random
@@ -13,9 +13,9 @@ import ugame
 
 def splash_scene():
     # this function is the splash scene
-    
+
     # sound prep
-    coin_sound = open("coin.wav", 'rb')
+    coin_sound = open("coin.wav", "rb")
     sound = ugame.audio
     sound.stop()
     sound.mute(False)
@@ -23,10 +23,11 @@ def splash_scene():
 
     # image banks
     image_bank_mt_background = stage.Bank.from_bmp16("mt_game_studio.bmp")
-    
+
     # sets the background to image 0 in the bank
-    background = stage.Grid(image_bank_mt_background, constants.SCREEN_X,
-                            constants.SCREEN_Y)
+    background = stage.Grid(
+        image_bank_mt_background, constants.SCREEN_X, constants.SCREEN_Y
+    )
 
     # mt logo tiles
     # https://ezgif.com/sprite-cutter/ezgif-5-818cdbcc3f66.png
@@ -136,8 +137,9 @@ def game_scene():
     sound.mute(False)
 
     # sets the background, 10x8
-    background = stage.Grid(image_bank_background, constants.SCREEN_X,
-                            constants.SCREEN_Y)
+    background = stage.Grid(
+        image_bank_background, constants.SCREEN_X, constants.SCREEN_Y
+    )
     for x_location in range(constants.SCREEN_GRID_X):
         for y_location in range(constants.SCREEN_GRID_Y):
             tile_picked = random.randint(1, 3)
