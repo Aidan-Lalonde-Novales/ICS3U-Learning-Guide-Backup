@@ -2,7 +2,7 @@
 
 # Created by Aidan Lalonde-Novales
 # Created May 2022
-# This file contains Learning Guide 10's code.
+# This file contains Learning Guide 11's code.
 
 import random
 import time
@@ -122,6 +122,9 @@ def menu_scene():
 
 def game_scene():
     # this function is the main game game_scene
+
+    # for score
+    score = 0
 
     def show_alien():
         # this function takes an alien from off screen and moves it on
@@ -259,6 +262,35 @@ def game_scene():
                     constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y
                 )
                 show_alien()
+
+        # each frame check if any of the lasers are touching any of the aliens
+        for laser_number in range(len(lasers)):
+            if lasers[laser_number].x > 0:
+                for alien_number in range(len(aliens)):
+                    if aliens[alien_number].x > 0:
+                        if stage.collide(
+                            lasers[laser_number].x + 6,
+                            lasers[laser_number].y + 2,
+                            lasers[laser_number].x + 11,
+                            lasers[laser_number].y + 12,
+                            aliens[alien_number].x + 1,
+                            aliens[alien_number].y,
+                            aliens[alien_number].x + 15,
+                            aliens[alien_number].y + 15,
+                        ):
+                            # alien hit
+                            aliens[alien_number].move(
+                                constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y
+                            )
+                            lasers[laser_number].move(
+                                constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y
+                            )
+                            boom_sound = open("boom.wav", "rb")
+                            sound.stop()
+                            sound.play(boom_sound)
+                            show_alien()
+                            show_alien()
+                            score = score + 1
 
         # redraw Sprites
         game.render_sprites(lasers + [ship] + aliens)
