@@ -2,7 +2,7 @@
 
 # Created by Aidan Lalonde-Novales
 # Created May 2022
-# This file contains Learning Guide 11's code.
+# This file contains Learning Guide 12's code.
 
 import random
 import time
@@ -126,6 +126,12 @@ def game_scene():
     # for score
     score = 0
 
+    score_text = stage.Text(width=29, height=14)
+    score_text.clear()
+    score_text.cursor(0, 0)
+    score_text.move(1, 1)
+    score_text.text("Score: {0}".format(score))
+
     def show_alien():
         # this function takes an alien from off screen and moves it on
         for alien_number in range(len(aliens)):
@@ -190,7 +196,7 @@ def game_scene():
     # creates a stage, sets to 60fps
     game = stage.Stage(ugame.display, 60)
     # order of layers
-    game.layers = lasers + [ship] + aliens + [background]
+    game.layers = [score_text] + lasers + [ship] + aliens + [background]
     # render the background and sprite list, most likely once per scene
     game.render_block()
 
@@ -262,6 +268,13 @@ def game_scene():
                     constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y
                 )
                 show_alien()
+                score -= 1
+                if score < 0:
+                    score = 0
+                score_text.clear()
+                score_text.cursor(0, 0)
+                score_text.move(1, 1)
+                score_text.text("Score: {0}".format(score))
 
         # each frame check if any of the lasers are touching any of the aliens
         for laser_number in range(len(lasers)):
@@ -291,6 +304,10 @@ def game_scene():
                             show_alien()
                             show_alien()
                             score = score + 1
+                            score_text.clear()
+                            score_text.cursor(0, 0)
+                            score_text.move(1, 1)
+                            score_text.text("Score: {0}".format(score))
 
         # redraw Sprites
         game.render_sprites(lasers + [ship] + aliens)
